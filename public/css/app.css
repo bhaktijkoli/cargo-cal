@@ -1,3 +1,35 @@
+section#welcome {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("/img/background.jpg");
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+section#welcome .overlay {
+  position: absolute;
+  top: 0px;
+  background: #00000054;
+  width: 100%;
+  min-height: 100vh;
+}
+section#welcome .container {
+  padding-top: 200px;
+  color: #FFFFFF;
+}
+section#welcome p {
+  font-size: 1em;
+}
 
+.navbar {
+  width: 100%;
+  z-index: 1080;
+}
+
+.navbar-fixed {
+  position: fixed;
+}
 
 /*# sourceMappingURL=app.css.map */
