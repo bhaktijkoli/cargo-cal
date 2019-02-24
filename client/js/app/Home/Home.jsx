@@ -8,6 +8,9 @@ class Home extends Component {
     this.windowScrollEvent();
     $(window).scroll(this.windowScrollEvent);
   }
+  componentWillUnmount() {
+    $('#navbar-main').removeClass('navbar-transparent');  
+  }
   render() {
     return (
       <main>
@@ -20,7 +23,7 @@ class Home extends Component {
                   <h1>Lorem ipsum dolor sit</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-                <Link to="" className="btn btn-primary animated fadeInUp">Calculate</Link>
+                <Link to="/calculate" className="btn btn-primary animated fadeInUp">Calculate</Link>
               </div>
             </div>
           </div>

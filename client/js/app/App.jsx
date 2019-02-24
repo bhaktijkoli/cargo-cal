@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Navbar from './Layout/Navbar.jsx';
 import Home from './Home/Home.jsx';
+import Calculate from './Calculate/Calculate.jsx';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/calculate" component={Calculate}/>
         </Switch>
       </div>
     );

@@ -32,4 +32,8 @@ section#welcome p {
   position: fixed;
 }
 
+.navbar-space {
+  height: 100px;
+}
+
 /*# sourceMappingURL=app.css.map */
