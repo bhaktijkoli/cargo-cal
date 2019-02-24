@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 class LoginForm extends Component {
-  constructor() {
-    
+  constructor(props) {
+    super(props);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
   render() {
     return (
