@@ -27,9 +27,7 @@ class Navbar extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a href="#pablo" className="btn btn-primary" data-toggle="dropdown">
-                  Register
-                </a>
+                <Link to="/login" className="btn btn-primary" data-toggle="dropdown">Login</Link>
               </li>
             </ul>
           </div>
