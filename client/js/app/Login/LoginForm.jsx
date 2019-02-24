@@ -31,6 +31,10 @@ class LoginForm extends Component {
       </div>
     );
   }
+  onFormSubmit(e) {
+    e.preventDefault();
+    
+  }
 }
 
 export default LoginForm;
