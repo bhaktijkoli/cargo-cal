@@ -9,6 +9,9 @@ class Login extends Component {
     this.props.dispatch({type: "AUTH_MENU", payload: "home"})
   }
   render() {
+    if(this.props.auth.user) {
+      window.location.href = "/"
+    }
     return (
       <main>
         <div className="navbar-space"></div>

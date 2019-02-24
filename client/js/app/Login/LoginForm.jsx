@@ -6,6 +6,9 @@ class LoginForm extends Component {
     super(props);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
+  componentDidMount() {
+    $('#error').hide();
+  }
   render() {
     return (
       <div className="card animated fadeInUp">
@@ -15,13 +18,16 @@ class LoginForm extends Component {
           <div className="row" style={{marginTop:20}}>
             <div className="col-sm-12">
               <form onSubmit={this.onFormSubmit}>
+                <div id="error" className="alert alert-danger">
+                  <p id="errorMsg"></p>
+                </div>
                 <div className="form-group">
                   <label htmlFor="email">Email:</label>
-                  <input type="email" className="form-control" id="lenght" placeholder="Enter email" />
+                  <input type="email" className="form-control" id="email" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password:</label>
-                  <input type="password" className="form-control" id="width" placeholder="Enter password" />
+                  <input type="password" className="form-control" id="password" placeholder="Enter password" />
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
               </form>
@@ -33,7 +39,14 @@ class LoginForm extends Component {
   }
   onFormSubmit(e) {
     e.preventDefault();
-    
+    $('#error').hide();
+    var email = $('#email').val()
+    var password = $('#password').val()
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .catch(res => {
+      $('#errorMsg').html(res.message);
+      $('#error').show(200);
+    })
   }
 }
 

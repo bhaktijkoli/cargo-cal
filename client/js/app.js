@@ -6,4 +6,6 @@ import store from "./app/store";
 
 import App from './app/App';
 
+require('./app/firebase');
+
 ReactDOM.render(<BrowserRouter><Provider store={store}><App/></Provider></BrowserRouter>, document.getElementById('root'));

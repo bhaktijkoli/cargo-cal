@@ -8,6 +8,11 @@ import Calculate from './Calculate/Calculate.jsx';
 import Login from './Login/Login.jsx';
 
 class App extends Component {
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged( (user) => {
+      this.props.dispatch({type: "AUTH_SET_USER", payload: user})
+    });
+  }
   render() {
     return (
       <div id="wrapper">
@@ -19,9 +24,6 @@ class App extends Component {
         </Switch>
       </div>
     );
-  }
-  componentDidMount() {
-
   }
 }
 function mapStateToProps(state) {
