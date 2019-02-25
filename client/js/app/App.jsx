@@ -11,13 +11,15 @@ class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged( (user) => {
       this.props.dispatch({type: "AUTH_SET_USER", payload: user})
-      firebase.firestore().collection('Trucks').get()
-      .then(querySnapshot => {
-        console.log(querySnapshot.data());
-        querySnapshot.forEach(el => {
-          console.log(el.data());
-        })
-      })
+      var db = firebase.firestore();
+      db.collection("trucks").get()
+      .then(snapshot => {
+        var trucks = [];
+        snapshot.docs.forEach(el => {
+          trucks.push(el.data());
+        });
+        this.props.dispatch({type: "SET_TRUCKS", payload: trucks});
+      });
     });
   }
   render() {

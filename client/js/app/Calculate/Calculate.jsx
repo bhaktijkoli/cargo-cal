@@ -24,10 +24,10 @@ class Calculate extends Component {
         <section id="calculate">
           <div className="container">
             <If condition={this.state.stage==0}>
-              <ContainerSize data={this.state} update={this.onCallUpdate}/>
+              <ContainerSize payload={this.state} data={this.props.data} update={this.onCallUpdate}/>
             </If>
             <If condition={this.state.stage==1}>
-              <AddTyres data={this.state} update={this.onCallUpdate}/>
+              <AddTyres payload={this.state} data={this.props.data} update={this.onCallUpdate}/>
             </If>
           </div>
         </section>
@@ -42,6 +42,7 @@ class Calculate extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
+    data: state.data,
   };
 }
 

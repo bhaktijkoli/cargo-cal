@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter, Link } from 'react-router-dom';
+import { If } from 'react-if'
 
 class ContainerSize extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      model: -1,
+      length: 0,
+      width: 0,
+      height: 0,
+    }
+    this.onModelChange = this.onModelChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
   render() {
+    let data = this.props.data;
+    let modelOptions = data.trucks.map((el, key) => {
+      return <option key={key} value={key}>{el.model}</option>
+    })
     return (
       <div className="row">
         <div className="col-sm-12">
@@ -24,18 +36,33 @@ class ContainerSize extends Component {
                 <div className="col-sm-6">
                   <form onSubmit={this.onFormSubmit}>
                     <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Lenght (mm):</label>
-                      <input type="number" className="form-control" id="lenght" placeholder="Enter Lenght" />
+                      <label htmlFor="model">Truck Model:</label>
+                      <select id="model" className="form-control" onChange={this.onModelChange}>
+                        <option value="-1">None</option>
+                        {modelOptions}
+                      </select>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Width (mm):</label>
-                      <input type="number" className="form-control" id="width" placeholder="Enter Width" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Height (mm):</label>
-                      <input type="number" className="form-control" id="height" placeholder="Enter Height" />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Next</button>
+                    <If condition={this.state.model!=-1}>
+                      <div>
+                        <div className="form-group">
+                          <label htmlFor="length">Lenght (mm):</label>
+                          <input type="text" className="form-control" name="length" id="length" placeholder="Enter Lenght" />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="width">Width (mm):</label>
+                          <input type="text" className="form-control" id="width" placeholder="Enter Width" />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="height">Height (mm):</label>
+                          <input type="text" className="form-control" id="height" placeholder="Enter Height" />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="weight">Weight (kg):</label>
+                          <input type="text" className="form-control" id="weight" placeholder="Enter Weight" />
+                        </div>
+                      </div>
+                    </If>
+                    <button type="submit" className="btn btn-primary" disabled={this.state.model==-1}>Next</button>
                   </form>
                 </div>
               </div>
@@ -45,10 +72,23 @@ class ContainerSize extends Component {
       </div>
     );
   }
+  onModelChange(e) {
+    var val = e.target.value;
+    this.setState({model: val});
+    let truck = this.props.data.trucks[val];
+    if(truck) {
+      setTimeout(function () {
+        $('#length').val(truck.length)
+        $('#width').val(truck.width)
+        $('#height').val(truck.height)
+        $('#weight').val(truck.weight)
+      }, 10);
+    }
+  }
   onFormSubmit() {
-    var data = this.props.data;
-    data.stage = 1;
-    this.props.update(data);
+    var payload = this.props.payload;
+    payload.stage = 1;
+    this.props.update(payload);
   }
 }
 
