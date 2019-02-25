@@ -9,7 +9,8 @@ class Home extends Component {
     $(window).scroll(this.windowScrollEvent);
   }
   componentWillUnmount() {
-    $('#navbar-main').removeClass('navbar-transparent');  
+    $('#navbar-main').removeClass('navbar-transparent');
+    $('#navbar-main').addClass('bg-primary');
   }
   render() {
     return (
@@ -36,8 +37,10 @@ class Home extends Component {
   windowScrollEvent() {
     if($(this).scrollTop()>=100){
       $('#navbar-main').removeClass('navbar-transparent');
+      $('#navbar-main').addClass('bg-primary');
     } else {
       $('#navbar-main').addClass('navbar-transparent');
+      $('#navbar-main').removeClass('bg-primary');
     }
   }
 }

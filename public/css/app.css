@@ -1,3 +1,21 @@
+.navbar {
+  width: 100%;
+  z-index: 1080;
+  text-transform: uppercase;
+}
+
+.navbar-fixed {
+  position: fixed;
+}
+
+.navbar-space {
+  height: 100px;
+}
+
+form .btn {
+  min-width: 150px;
+}
+
 section#welcome {
   position: relative;
   width: 100%;
@@ -17,23 +35,13 @@ section#welcome .overlay {
 }
 section#welcome .container {
   padding-top: 200px;
-  color: #FFFFFF;
+}
+section#welcome h1 {
+  color: #FFFFFF !important;
 }
 section#welcome p {
   font-size: 1em;
-}
-
-.navbar {
-  width: 100%;
-  z-index: 1080;
-}
-
-.navbar-fixed {
-  position: fixed;
-}
-
-.navbar-space {
-  height: 100px;
+  color: #FFFFFF !important;
 }
 
 /*# sourceMappingURL=app.css.map */

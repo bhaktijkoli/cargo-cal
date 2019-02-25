@@ -16,19 +16,12 @@ section#welcome {
   }
   .container {
     padding-top: 200px;
-    color: #FFFFFF;
+  }
+  h1 {
+    color: #FFFFFF !important;
   }
   p {
     font-size: 1em;
+    color: #FFFFFF !important;
   }
-}
-.navbar {
-  width: 100%;
-  z-index: 1080;
-}
-.navbar-fixed {
-  position: fixed;
-}
-.navbar-space {
-  height: 100px;
 }

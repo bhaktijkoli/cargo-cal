@@ -11,6 +11,13 @@ class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged( (user) => {
       this.props.dispatch({type: "AUTH_SET_USER", payload: user})
+      firebase.firestore().collection('Trucks').get()
+      .then(querySnapshot => {
+        console.log(querySnapshot.data());
+        querySnapshot.forEach(el => {
+          console.log(el.data());
+        })
+      })
     });
   }
   render() {

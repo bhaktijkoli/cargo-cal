@@ -4,40 +4,41 @@ import { Link } from 'react-router-dom';
 class Navbar extends Component {
   render() {
     return (
-      <nav id="navbar-main" className="navbar navbar-expand-lg bg-primary navbar-fixed">
+      <nav id="navbar-main" className="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed navbar-transparent">
         <div className="container">
-          <a className="navbar-brand" href="#">LOGO</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="sr-only">Toggle navigation</span>
-            <span className="navbar-toggler-icon"></span>
-            <span className="navbar-toggler-icon"></span>
+          <Link className="navbar-brand" to="/">Load Calculator</Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Features</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Pricing</a>
-              </li>
-            </ul>
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to="/login" className="btn btn-primary" data-toggle="dropdown">Login</Link>
-              </li>
-            </ul>
+          <div className="collapse navbar-collapse" id="navbar-primary">
+            <div className="navbar-collapse-header">
+              <div className="row">
+                <div className="col-6 collapse-brand">
+                  <a href="index.html">
+                    <img src="assets/img/brand/blue.png" />
+                    </a>
+                  </div>
+                  <div className="col-6 collapse-close">
+                    <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+                      <span></span>
+                      <span></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <ul className="navbar-nav ml-lg-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">Login</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    );
-  }
-  componentDidMount() {
+        </nav>
+      );
+    }
+    componentDidMount() {
 
+    }
   }
-}
 
-export default Navbar;
+  export default Navbar;
