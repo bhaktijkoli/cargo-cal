@@ -11,6 +11,8 @@ class Calculate extends Component {
     super(props);
     this.state = {
       stage: 0,
+      container: null,
+      tyres: [],
     }
     this.onCallUpdate = this.onCallUpdate.bind(this)
   }

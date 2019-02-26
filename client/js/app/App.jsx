@@ -11,15 +11,7 @@ class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged( (user) => {
       this.props.dispatch({type: "AUTH_SET_USER", payload: user})
-      var db = firebase.firestore();
-      db.collection("trucks").get()
-      .then(snapshot => {
-        var trucks = [];
-        snapshot.docs.forEach(el => {
-          trucks.push(el.data());
-        });
-        this.props.dispatch({type: "SET_TRUCKS", payload: trucks});
-      });
+      this.getData();
     });
   }
   render() {
@@ -33,6 +25,25 @@ class App extends Component {
         </Switch>
       </div>
     );
+  }
+  getData() {
+    var db = firebase.firestore();
+    db.collection("trucks").get()
+    .then(snapshot => {
+      var trucks = [];
+      snapshot.docs.forEach(el => {
+        trucks.push(el.data());
+      });
+      this.props.dispatch({type: "SET_TRUCKS", payload: trucks});
+    });
+    db.collection("tyres").get()
+    .then(snapshot => {
+      var tyres = [];
+      snapshot.docs.forEach(el => {
+        tyres.push(el.data());
+      });
+      this.props.dispatch({type: "SET_TYRES", payload: tyres});
+    });
   }
 }
 function mapStateToProps(state) {

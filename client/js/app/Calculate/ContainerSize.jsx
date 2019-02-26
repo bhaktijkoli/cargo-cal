@@ -88,6 +88,7 @@ class ContainerSize extends Component {
   onFormSubmit() {
     var payload = this.props.payload;
     payload.stage = 1;
+    payload.container = this.props.data.trucks[this.state.model];
     this.props.update(payload);
   }
 }
