@@ -5,6 +5,7 @@ import {If} from 'react-if'
 
 import ContainerSize from './ContainerSize'
 import AddTyres from './AddTyres'
+import Result from './Result'
 
 class Calculate extends Component {
   constructor(props) {
@@ -30,6 +31,9 @@ class Calculate extends Component {
             </If>
             <If condition={this.state.stage==1}>
               <AddTyres payload={this.state} data={this.props.data} update={this.onCallUpdate}/>
+            </If>
+            <If condition={this.state.stage==2}>
+              <Result payload={this.state} data={this.props.data} />
             </If>
           </div>
         </section>

@@ -7,5 +7,6 @@ import store from "./app/store";
 import App from './app/App';
 
 require('./app/firebase');
+require('./app/scripts/calculate');
 
 ReactDOM.render(<BrowserRouter><Provider store={store}><App/></Provider></BrowserRouter>, document.getElementById('root'));

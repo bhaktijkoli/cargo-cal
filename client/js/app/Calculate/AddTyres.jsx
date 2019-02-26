@@ -24,7 +24,7 @@ class AddTyres extends Component {
       return(
         <tr key={key}>
           <td>{el.model.toUpperCase()}</td>
-          <td><input id={"number"+key} type="number" className="form-control"/></td>
+          <td><input id={"number"+key} type="number" className="form-control" defaultValue={el.number}/></td>
           <td><button className="btn btn-sm btn-danger" style={{marginTop:8}} onClick={e=>this.onRemoveTyre(key)}><i className="fa fa-trash-o" aria-hidden="true"></i></button> </td>
         </tr>
       )
@@ -45,7 +45,7 @@ class AddTyres extends Component {
                           <thead>
                             <tr>
                               <th width="20%">Model</th>
-                              <th width="10%">Number</th>
+                              <th width="10%">Quantity</th>
                               <th width="10%"></th>
                             </tr>
                           </thead>
@@ -96,7 +96,7 @@ class AddTyres extends Component {
   onAddTyre() {
     var tyres = this.state.tyres;
     var tyre = this.props.data.tyres[this.state.model];
-    tyre.number = 0;
+    tyre.number = 20;
     tyres.push(tyre);
     this.setState({tyres});
   }
