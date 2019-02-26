@@ -44,4 +44,11 @@ section#welcome p {
   color: #FFFFFF !important;
 }
 
+#table-result td {
+  color: #FFFFFF;
+}
+#table-result .layer-header {
+  color: #525f7f;
+}
+
 /*# sourceMappingURL=app.css.map */

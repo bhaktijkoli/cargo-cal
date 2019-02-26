@@ -3,6 +3,15 @@ import { connect } from "react-redux";
 import { withRouter, Link } from 'react-router-dom';
 import {If} from 'react-if'
 
+let colors = [
+  '#2ecc71',
+  '#3498db',
+  '#e67e22',
+  '#e74c3c',
+  '#8e44ad',
+  '#1abc9c',
+]
+
 class AddTyres extends Component {
   constructor(props) {
     super(props);
@@ -85,6 +94,7 @@ class AddTyres extends Component {
     var tyres = this.state.tyres;
     for(var i=0; i<tyres.length;i++) {
       tyres[i].number = $('#number'+i).val();
+      tyres[i].color = colors[i]
     }
     data.tyres = tyres;
     this.props.update(data);

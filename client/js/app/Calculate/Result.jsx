@@ -33,7 +33,7 @@ class Result extends Component {
               <h2 className="card-title">Lorem ipsum dolor sit amet</h2>
               <h6 className="card-subtitle mb-2 text-muted">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
               <div className="row" style={{marginTop:20}}>
-                <table className="table table-responsive table-bordered">
+                <table id="table-result" className="table table-responsive table-bordered">
                   {this.printLayers()}
                 </table>
               </div>
@@ -48,7 +48,7 @@ class Result extends Component {
       return(
         <tr>
           <tr key={key}>
-            <td colspan={this.getMaxTyres(layer)}>{"Layer " + (key+1)}</td>
+            <td className="layer-header" colspan={this.getMaxTyres(layer)}>{"Layer " + (key+1)}</td>
           </tr>
           {this.printLayer(layer)}
         </tr>
@@ -67,7 +67,7 @@ class Result extends Component {
   printRow(row) {
     return row.map((tyre, key) => {
       return(
-        <td key={key}>{tyre.model.toUpperCase()}</td>
+        <td key={key} style={{background:tyre.color}}>{tyre.model.toUpperCase()}</td>
       )
     })
   }

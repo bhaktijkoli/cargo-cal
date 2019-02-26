@@ -9,6 +9,7 @@ window.startCalculate = (container, tyreTypes) => {
       width: el.width,
       weight: el.weight,
       model: el.model,
+      color: el.color,
     }
     for(var i=0;i<el.number;i++) {
       tyres.push(tyre);
