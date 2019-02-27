@@ -14,7 +14,7 @@ class Result extends Component {
     let payload = this.props.payload;
     let tyres = payload.tyres;
     tyres.forEach(el => {
-      el.diameter = (el.width * (el.aspect_ratio/100)*2) + el.rim_diameter;
+      el.diameter = (el.width * (el.aspect_ratio/100)*2) + (el.rim_diameter * 25.4);
       el.weight = el.weight;
       el.remaing = el.number;
     })
