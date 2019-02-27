@@ -11,6 +11,7 @@ class Home extends Component {
   componentWillUnmount() {
     $('#navbar-main').removeClass('navbar-transparent');
     $('#navbar-main').addClass('bg-primary');
+    $(window).unbind('scroll');
   }
   render() {
     return (
