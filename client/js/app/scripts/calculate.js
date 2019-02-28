@@ -93,8 +93,6 @@ window.startCalculate = (container, tyreTypes) => {
       }
       var tyre = tyres[0];
       var angle = 20 * (Math.PI/180);
-      console.log("Y is", pos.y);
-      console.log("Angle Y is ", (Math.sin(angle) * tyre.diameter));
       if(pos.y + (Math.sin(angle) * tyre.diameter) > container.height) {
         isLayerCompleted = true;
         layerIndex++;
@@ -115,7 +113,6 @@ const getHorizontalY = (layer) => {
   layer.forEach(el => {
     y += el[0].width;
   })
-  console.log("Horizonal y", y);
   return y;
 }
 
