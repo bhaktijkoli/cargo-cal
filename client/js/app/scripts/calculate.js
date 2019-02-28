@@ -15,11 +15,13 @@ window.startCalculate = (container, tyreTypes) => {
       tyres.push(tyre);
     }
   });
-  let layers = [];
+
   // Start arrangement
+  let layers = [];
+  // Horizntal Loading
   let pos = {x:0, y:0, z:0};
   var isCompleted = false;
-  main:
+  horizontalArrangement:
   while(!isCompleted) {
     let layer = [];
     var isLayerCompleted = false;
@@ -33,7 +35,7 @@ window.startCalculate = (container, tyreTypes) => {
         tyres.shift();
         pos.x += tyre.diameter;
         if(tyres.length == 0) {
-          break main;
+          break horizontalArrangement;
         }
         if(pos.x + tyres[0].diameter > container.width) {
           layer.push(row);
@@ -50,6 +52,55 @@ window.startCalculate = (container, tyreTypes) => {
       isCompleted = true;
     }
   }
+  // Cross Loading
+  isCompleted = false;
+  layerIndex = 0;
+  pos = {x:0, y:0, z:0}
+  crossLoading:
+  while(!isCompleted) {
+    var layer = layers[layerIndex];
+    var firstTyre = false;
+    var firstRow = false;
+    var isLayerCompleted = false;
+    pos.y = getHorizontalY(layer);
+    while(!isLayerCompleted) {
+      let row = [];
+      var isRowCompleted = false;
+      pos.x = 0;
+      while(!isRowCompleted) {
+        var tyre = tyres[0];
+        row.push(tyre);
+        tyres.shift();
+        var angle = 20 * (Math.PI/180);
+        if(firstTyre) {
+          pos.x += Math.cos(angle) * tyre.diameter;
+          firstTyre = true;
+        } else {
+          pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
+        }
+        if(tyres.length == 0) {
+          break crossLoading;
+        }
+        if(pos.x + tyres[0].diameter > container.width) {
+          if(!layer) break crossLoading;
+          layer.push(row);
+          pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+          if(!firstRow) {
+            pos.y += Math.sin(angle) + tyre.diameter;
+          }
+          isRowCompleted = true;
+        }
+      }
+      var tyre = tyres[0];
+      var angle = 20 * (Math.PI/180);
+      console.log("Y is", pos.y);
+      console.log("Angle Y is ", (Math.sin(angle) * tyre.diameter));
+      if(pos.y + (Math.sin(angle) * tyre.diameter) > container.height) {
+        isLayerCompleted = true;
+        layerIndex++;
+      }
+    }
+  }
   console.log("Final result:");
   console.log(layers);
   console.log("Remaing");
@@ -59,6 +110,14 @@ window.startCalculate = (container, tyreTypes) => {
   }
 }
 
+const getHorizontalY = (layer) => {
+  let y = 0;
+  layer.forEach(el => {
+    y += el[0].width;
+  })
+  console.log("Horizonal y", y);
+  return y;
+}
 
 /*
 SORT FUNCTION
@@ -69,7 +128,7 @@ const sortTyres = (arr) => {
   for (i=0; i < len; i++){
     for (j=0, stop=len-i; j < stop; j++){
       if(arr[j] && arr[j+1]) {
-        if (arr[j].weight > arr[j+1].weight) {
+        if (arr[j].weight < arr[j+1].weight) {
           swap(arr, j, j+1);
         }
       }

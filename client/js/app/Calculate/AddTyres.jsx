@@ -73,7 +73,13 @@ class AddTyres extends Component {
                         </select>
                       </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-3">
+                      <div className="form-group">
+                        <label htmlFor="model">Quantity:</label>
+                        <input id="quantity" className="form-control" defaultValue="100" type="number" min="0"/>
+                      </div>
+                    </div>
+                    <div className="col-sm-3">
                       <button className="btn btn-default" onClick={this.onAddTyre} style={{marginTop:32}} disabled={this.state.model==-1}><i className="fa fa-plus" aria-hidden="true"></i>&nbsp;Add </button>
                     </div>
                     <div className="col-sm-6">
@@ -106,7 +112,8 @@ class AddTyres extends Component {
   onAddTyre() {
     var tyres = this.state.tyres;
     var tyre = this.props.data.tyres[this.state.model];
-    tyre.number = 20;
+    tyre.number = $('#quantity').val();
+    $("#quantity").val(100);
     tyres.push(tyre);
     this.setState({tyres});
   }
