@@ -109,6 +109,7 @@ window.startCalculate = (container, tyreTypes) => {
 }
 
 const getHorizontalY = (layer) => {
+  if(!layer) return 0;
   let y = 0;
   layer.forEach(el => {
     y += el[0].width;

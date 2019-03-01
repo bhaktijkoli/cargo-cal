@@ -50,7 +50,7 @@ class Result extends Component {
           <tr key={key}>
             <td className="layer-header" colspan={this.getMaxTyres(layer)}>{"Layer " + (key+1)}</td>
           </tr>
-          {this.printLayer(layer)}
+          {this.printLayer(layer.reverse())}
         </tr>
       )
     })
