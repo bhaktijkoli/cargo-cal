@@ -20,10 +20,25 @@ window.startCalculate = (container, tyreTypes) => {
       tyres.push(tyre);
     }
   });
-
   // Start arrangement
   let layers = [];
   // Horizntal Loading
+  addHorizontalLayers(container, tyres, layers);
+  // Cross Loading
+  addCrossLoadingLayers(container, tyres, layers);
+  console.log("Final result:");
+  console.log(layers);
+  console.log("Remaing");
+  console.log(tyres);
+  return {
+    layers: layers
+  }
+}
+
+/*
+ARRANGEMENT FUNCTIONS
+*/
+const addHorizontalLayers = (container, tyres, layers) => {
   let pos = {x:0, y:0, z:0};
   var isCompleted = false;
   horizontalArrangement:
@@ -45,16 +60,14 @@ window.startCalculate = (container, tyreTypes) => {
       }
     }
   }
-  // Cross Loading
+}
+const addCrossLoadingLayers = (container, tyres, layers) => {
   isCompleted = false;
   layerIndex = 0;
   pos = {x:0, y:0, z:0}
   crossLoading:
   while(!isCompleted) {
     var layer = layers[layerIndex];
-    if(!layer) {
-      break crossLoading;
-    }
     var firstRow = true;
     var isLayerCompleted = false;
     pos.y = getHorizontalY(layer);
@@ -74,15 +87,7 @@ window.startCalculate = (container, tyreTypes) => {
       }
     }
   }
-  console.log("Final result:");
-  console.log(layers);
-  console.log("Remaing");
-  console.log(tyres);
-  return {
-    layers: layers
-  }
 }
-
 /*
 HORIZONTAL FUNCTION
 */
@@ -112,7 +117,9 @@ const addHorizontalRow = (container, tyres, layer, pos) => {
     }
   }
 }
-
+/*
+CROSS LOADING FUNCTIONs
+*/
 const addFirstCrossRow = (container, tyres, layer, pos) => {
   let row = [];
   var isRowCompleted = false;
@@ -161,8 +168,8 @@ const addCrossRow = (container, tyres, layer, pos) => {
     row.push(tyre);
     tyres.shift();
     var angle = 20 * (Math.PI/180);
-    pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
     tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
+    pos.x += tyre.size.x;
     if(tyres.length == 0) {
       layer.push(row);
       return;
