@@ -86,12 +86,12 @@ const addHorizontalRow = (container, tyres, layer, pos) => {
   pos.x = 0;
   while(!isRowCompleted) {
     var tyre = tyres[0];
+    pos.x += tyre.diameter;
     tyre.size.x = tyre.diameter;
     tyre.size.y = tyre.width;
     tyre.size.z = tyre.diameter;
     row.push(tyre);
     tyres.shift();
-    pos.x += tyre.diameter;
     if(tyres.length == 0) return;
     if(pos.x + tyres[0].diameter > container.width) {
       layer.push(row);
@@ -107,20 +107,25 @@ const addFirstCrossRow = (container, tyres, layer, pos) => {
   pos.x = 0;
   while(!isRowCompleted) {
     var tyre = tyres[0];
-    row.push(tyre);
-    tyres.shift();
     var angle = 20 * (Math.PI/180);
     if(firstTyre) {
-      pos.x += Math.cos(angle) * tyre.diameter;
+      tyre.size.x = Math.cos(angle) * tyre.diameter;
       firstTyre = true;
+    } else {
+      tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
     }
+    pos.x += tyre.size.x;
+    tyre.size.y = Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+    tyre.size.z = tyre.diameter;
+    row.push(tyre);
+    tyres.shift();
     if(tyres.length == 0) {
       return;
     }
     if(pos.x + tyres[0].diameter > container.width) {
       if(!layer) return;
       layer.push(row);
-      pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+      pos.y += tyre.size.y
       isRowCompleted = true;
     }
   }
@@ -135,6 +140,7 @@ const addCrossRow = (container, tyres, layer, pos) => {
     tyres.shift();
     var angle = 20 * (Math.PI/180);
     pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
+    tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
     if(tyres.length == 0) {
       return;
     }
