@@ -26,22 +26,7 @@ window.startCalculate = (container, tyreTypes) => {
     let layer = [];
     var isLayerCompleted = false;
     while(!isLayerCompleted) {
-      let row = [];
-      var isRowCompleted = false;
-      pos.x = 0;
-      while(!isRowCompleted) {
-        var tyre = tyres[0];
-        row.push(tyre);
-        tyres.shift();
-        pos.x += tyre.diameter;
-        if(tyres.length == 0) {
-          break horizontalArrangement;
-        }
-        if(pos.x + tyres[0].diameter > container.width) {
-          layer.push(row);
-          isRowCompleted = true;
-        }
-      }
+      addHorizontalRow(container, tyres, layer, pos)
       if(layer.length == 3) {
         layers.push(layer);
         isLayerCompleted = true;
@@ -59,38 +44,17 @@ window.startCalculate = (container, tyreTypes) => {
   crossLoading:
   while(!isCompleted) {
     var layer = layers[layerIndex];
-    var firstTyre = false;
-    var firstRow = false;
+    var firstRow = true;
     var isLayerCompleted = false;
     pos.y = getHorizontalY(layer);
     while(!isLayerCompleted) {
-      let row = [];
-      var isRowCompleted = false;
-      pos.x = 0;
-      while(!isRowCompleted) {
-        var tyre = tyres[0];
-        row.push(tyre);
-        tyres.shift();
-        var angle = 20 * (Math.PI/180);
-        if(firstTyre) {
-          pos.x += Math.cos(angle) * tyre.diameter;
-          firstTyre = true;
-        } else {
-          pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
-        }
-        if(tyres.length == 0) {
-          break crossLoading;
-        }
-        if(pos.x + tyres[0].diameter > container.width) {
-          if(!layer) break crossLoading;
-          layer.push(row);
-          pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
-          if(!firstRow) {
-            pos.y += Math.sin(angle) + tyre.diameter;
-          }
-          isRowCompleted = true;
-        }
+      if(firstRow) {
+        addFirstCrossRow(container, tyres, layer, pos)
+        firstRow = false;
+      } else {
+        addCrossRow(container, tyres, layer, pos)
       }
+      if(tyres.length == 0) break crossLoading;
       var tyre = tyres[0];
       var angle = 20 * (Math.PI/180);
       if(pos.y + (Math.sin(angle) * tyre.diameter) > container.height) {
@@ -105,6 +69,74 @@ window.startCalculate = (container, tyreTypes) => {
   console.log(tyres);
   return {
     layers: layers
+  }
+}
+
+/*
+HORIZONTAL FUNCTION
+*/
+const addHorizontalRow = (container, tyres, layer, pos) => {
+  let row = [];
+  var isRowCompleted = false;
+  pos.x = 0;
+  while(!isRowCompleted) {
+    var tyre = tyres[0];
+    row.push(tyre);
+    tyres.shift();
+    pos.x += tyre.diameter;
+    if(tyres.length == 0) return;
+    if(pos.x + tyres[0].diameter > container.width) {
+      layer.push(row);
+      isRowCompleted = true;
+    }
+  }
+}
+
+const addFirstCrossRow = (container, tyres, layer, pos) => {
+  let row = [];
+  var isRowCompleted = false;
+  firstTyre = false;
+  pos.x = 0;
+  while(!isRowCompleted) {
+    var tyre = tyres[0];
+    row.push(tyre);
+    tyres.shift();
+    var angle = 20 * (Math.PI/180);
+    if(firstTyre) {
+      pos.x += Math.cos(angle) * tyre.diameter;
+      firstTyre = true;
+    }
+    if(tyres.length == 0) {
+      return;
+    }
+    if(pos.x + tyres[0].diameter > container.width) {
+      if(!layer) return;
+      layer.push(row);
+      pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+      isRowCompleted = true;
+    }
+  }
+}
+const addCrossRow = (container, tyres, layer, pos) => {
+  let row = [];
+  var isRowCompleted = false;
+  pos.x = 0;
+  while(!isRowCompleted) {
+    var tyre = tyres[0];
+    row.push(tyre);
+    tyres.shift();
+    var angle = 20 * (Math.PI/180);
+    pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
+    if(tyres.length == 0) {
+      return;
+    }
+    if(pos.x + tyres[0].diameter > container.width) {
+      if(!layer) return;
+      layer.push(row);
+      pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+      pos.y += Math.sin(angle) + tyre.diameter;
+      isRowCompleted = true;
+    }
   }
 }
 
