@@ -92,7 +92,11 @@ const addHorizontalRow = (container, tyres, layer, pos) => {
     tyre.size.z = tyre.diameter;
     row.push(tyre);
     tyres.shift();
-    if(tyres.length == 0) return;
+    console.log(tyres.length);
+    if(tyres.length == 0) {
+      layer.push(row);
+      return;
+    }
     if(pos.x + tyres[0].diameter > container.width) {
       layer.push(row);
       isRowCompleted = true;
@@ -120,6 +124,7 @@ const addFirstCrossRow = (container, tyres, layer, pos) => {
     row.push(tyre);
     tyres.shift();
     if(tyres.length == 0) {
+      layer.push(row);
       return;
     }
     if(pos.x + tyres[0].diameter > container.width) {
@@ -142,6 +147,7 @@ const addCrossRow = (container, tyres, layer, pos) => {
     pos.x += Math.cos(angle) * (3/4 * tyre.diameter);
     tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
     if(tyres.length == 0) {
+      layer.push(row);
       return;
     }
     if(pos.x + tyres[0].diameter > container.width) {
