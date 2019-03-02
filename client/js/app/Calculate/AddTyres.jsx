@@ -27,12 +27,12 @@ class AddTyres extends Component {
   render() {
     let models = this.props.data.tyres;
     let modelOptions = models.map((el, key)=> {
-      return <option key={key} value={key}>{el.model.toUpperCase()}</option>
+      return <option key={key} value={key}>{String(el.model).toUpperCase()}</option>
     })
     var tyreItems = this.state.tyres.map((el, key) => {
       return(
         <tr key={key}>
-          <td>{el.model.toUpperCase()}</td>
+          <td>{String(el.model).toString()}</td>
           <td><input id={"number"+key} type="number" className="form-control" defaultValue={el.number}/></td>
           <td><button className="btn btn-sm btn-danger" style={{marginTop:8}} onClick={e=>this.onRemoveTyre(key)}><i className="fa fa-trash-o" aria-hidden="true"></i></button> </td>
         </tr>
