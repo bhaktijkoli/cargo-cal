@@ -57,7 +57,7 @@ class ContainerSize extends Component {
                           <input type="text" className="form-control" id="height" placeholder="Enter Height" />
                         </div>
                         <div className="form-group">
-                          <label htmlFor="weight">Weight (kg):</label>
+                          <label htmlFor="weight">Weight (MT):</label>
                           <input type="text" className="form-control" id="weight" placeholder="Enter Weight" />
                         </div>
                       </div>

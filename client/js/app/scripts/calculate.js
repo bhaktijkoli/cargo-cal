@@ -37,6 +37,7 @@ window.startCalculate = (container, tyreTypes) => {
         isLayerCompleted = true;
       }
     }
+    if(tyres.length == 0) break horizontalArrangement;
     if(layer[0][0]) {
       pos.y += layer[0][0].diameter;
       if(pos.y + tyres[0].diameter > container.length) {

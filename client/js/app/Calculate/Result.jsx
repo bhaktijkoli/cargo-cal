@@ -29,11 +29,10 @@ class Result extends Component {
         <div className="col-sm-12">
           <div className="card animated fadeInUp">
             <div className="card-body">
-              <h2 className="card-title">Lorem ipsum dolor sit amet</h2>
-              <h6 className="card-subtitle mb-2 text-muted">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+              <h2 className="card-title">Loading sequence</h2>
               <div className="row" style={{marginTop:20}}>
                 <div id="table-result">
-                  {JSON.stringify(this.state.layers)}
+                  {this.printLayers()}
                 </div>
               </div>
             </div>
