@@ -20,11 +20,17 @@ class Home extends Component {
           <div className="overlay"></div>
           <div className="row">
             <div className="container">
+              <div className="col-sm-12">
+                <div className="animated fadeInDown">
+                  <h1>Calculate your load sequence within clicks</h1>
+                </div>
+              </div>
               <div className="col-sm-6">
                 <div className="animated fadeInDown">
-                  <h1>Lorem ipsum dolor sit</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p>CargoCal Load Calculator simulates placing tyres inside a container and determines their optional positioning within in quick, simple and effective way.</p>
                 </div>
+              </div>
+              <div className="col-sm-6">
                 <Link to="/calculate" className="btn btn-primary animated fadeInUp">Calculate</Link>
               </div>
             </div>

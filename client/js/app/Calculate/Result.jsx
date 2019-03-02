@@ -19,7 +19,6 @@ class Result extends Component {
       el.remaing = el.number;
     })
     var result = startCalculate(payload.container, tyres);
-    console.log(result);
     this.setState({
       layers: result.layers,
     })
@@ -34,7 +33,7 @@ class Result extends Component {
               <h6 className="card-subtitle mb-2 text-muted">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
               <div className="row" style={{marginTop:20}}>
                 <div id="table-result">
-                  {this.printLayers()}
+                  {JSON.stringify(this.state.layers)}
                 </div>
               </div>
             </div>

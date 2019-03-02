@@ -43,8 +43,8 @@ class AddTyres extends Component {
         <div className="col-sm-12">
           <div className="card animated fadeInUp">
             <div className="card-body">
-              <h2 className="card-title">Lorem ipsum dolor sit amet</h2>
-              <h6 className="card-subtitle mb-2 text-muted">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+              <h2 className="card-title">Add Tyres</h2>
+              <h6 className="card-subtitle mb-2 text-muted">Add tyres to be placed inside the container.</h6>
               <div className="row" style={{marginTop:20}}>
                 <div className="col-sm-12">
                   <div className="row">
