@@ -10,6 +10,11 @@ window.startCalculate = (container, tyreTypes) => {
       weight: el.weight,
       model: el.model,
       color: el.color,
+      size: {
+        x: 0,
+        y: 0,
+        z: 0,
+      }
     }
     for(var i=0;i<el.number;i++) {
       tyres.push(tyre);
@@ -81,6 +86,9 @@ const addHorizontalRow = (container, tyres, layer, pos) => {
   pos.x = 0;
   while(!isRowCompleted) {
     var tyre = tyres[0];
+    tyre.size.x = tyre.diameter;
+    tyre.size.y = tyre.width;
+    tyre.size.z = tyre.diameter;
     row.push(tyre);
     tyres.shift();
     pos.x += tyre.diameter;

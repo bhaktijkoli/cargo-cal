@@ -3,6 +3,9 @@
   z-index: 1080;
   text-transform: uppercase;
 }
+.bg-white {
+  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+}
 .navbar-fixed {
   position: fixed;
 }

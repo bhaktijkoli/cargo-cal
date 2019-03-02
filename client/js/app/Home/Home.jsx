@@ -10,7 +10,7 @@ class Home extends Component {
   }
   componentWillUnmount() {
     $('#navbar-main').removeClass('navbar-transparent');
-    $('#navbar-main').addClass('bg-primary');
+    $('#navbar-main').addClass('bg-white');
     $(window).unbind('scroll');
   }
   render() {
@@ -38,10 +38,10 @@ class Home extends Component {
   windowScrollEvent() {
     if($(this).scrollTop()>=100){
       $('#navbar-main').removeClass('navbar-transparent');
-      $('#navbar-main').addClass('bg-primary');
+      $('#navbar-main').addClass('bg-white');
     } else {
       $('#navbar-main').addClass('navbar-transparent');
-      $('#navbar-main').removeClass('bg-primary');
+      $('#navbar-main').removeClass('bg-white');
     }
   }
 }

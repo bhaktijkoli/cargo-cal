@@ -6,7 +6,8 @@ import LoginForm from './LoginForm'
 
 class Login extends Component {
   componentDidMount() {
-    this.props.dispatch({type: "AUTH_MENU", payload: "home"})
+    this.props.dispatch({type: "AUTH_MENU", payload: "login"})
+    $('#navbar-main').removeClass('navbar-transparent');
   }
   render() {
     if(this.props.auth.user) {
