@@ -48,11 +48,25 @@ section#welcome p {
   color: #FFFFFF !important;
 }
 
-#table-result td {
-  color: #FFFFFF;
+#table-result {
+  width: 100%;
+}
+#table-result .layer {
+  width: 100%;
+  border: thin solid #eee;
 }
 #table-result .layer-header {
+  padding: 10px;
   color: #525f7f;
+}
+#table-result .layer-rows {
+  width: 100%;
+}
+#table-result .layer-row {
+  color: #FFFFFF;
+  display: inline-block;
+  border: 1px solid #FFFFFF;
+  text-align: center;
 }
 
 /*# sourceMappingURL=app.css.map */

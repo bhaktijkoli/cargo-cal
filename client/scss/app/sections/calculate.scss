@@ -1,8 +1,20 @@
 #table-result {
-  td {
-    color: #FFFFFF;
+  width: 100%;
+  .layer {
+    width: 100%;
+    border: thin solid #eee;
   }
   .layer-header {
+    padding: 10px;
     color: #525f7f;
+  }
+  .layer-rows {
+    width: 100%;
+  }
+  .layer-row {
+    color: #FFFFFF;
+    display: inline-block;
+    border: 1px solid #FFFFFF;
+    text-align: center;
   }
 }

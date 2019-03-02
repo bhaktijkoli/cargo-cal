@@ -33,9 +33,9 @@ class Result extends Component {
               <h2 className="card-title">Lorem ipsum dolor sit amet</h2>
               <h6 className="card-subtitle mb-2 text-muted">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
               <div className="row" style={{marginTop:20}}>
-                <table id="table-result" className="table table-responsive table-bordered">
+                <div id="table-result">
                   {this.printLayers()}
-                </table>
+                </div>
               </div>
             </div>
           </div>
@@ -46,28 +46,27 @@ class Result extends Component {
   printLayers() {
     return this.state.layers.map((layer, key)=> {
       return(
-        <tr>
-          <tr key={key}>
-            <td className="layer-header" colspan={this.getMaxTyres(layer)}>{"Layer " + (key+1)}</td>
-          </tr>
+        <div className="layer" key={key}>
+          <div className="layer-header">{"Layer " + (key+1)}</div>
           {this.printLayer(layer.reverse())}
-        </tr>
+        </div>
       )
     })
   }
   printLayer(layer) {
     return layer.map((row, key) => {
       return(
-        <tr key={key}>
+        <div key={key} className="layer-rows">
           {this.printRow(row)}
-        </tr>
+        </div>
       )
     });
   }
   printRow(row) {
     return row.map((tyre, key) => {
+      var width = tyre.size.x/this.props.payload.container.width*100+'%';
       return(
-        <td key={key} style={{background:tyre.color}}>{tyre.model.toUpperCase()}</td>
+        <div className="layer-row" key={key} style={{background:tyre.color,width:width}}>{tyre.model.toUpperCase()}</div>
       )
     })
   }
