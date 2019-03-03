@@ -46,7 +46,7 @@ class Result extends Component {
       return(
         <div className="layer" key={key}>
           <div className="layer-header">{"Layer " + (key+1)}</div>
-          {this.printLayer(layer.reverse())}
+          {this.printLayer(layer)}
         </div>
       )
     })
@@ -63,6 +63,7 @@ class Result extends Component {
   printRow(row) {
     return row.map((tyre, key) => {
       var width = tyre.size.x/this.props.payload.container.width*100+'%';
+      console.log(width);
       return(
         <div className="layer-row" key={key} style={{background:tyre.color,width:width}}>{tyre.model.toUpperCase()}</div>
       )
