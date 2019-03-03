@@ -63,10 +63,14 @@ section#welcome p {
   width: 100%;
 }
 #table-result .layer-row {
+  position: relative;
   color: #FFFFFF;
   display: inline-block;
   border: 1px solid #FFFFFF;
   text-align: center;
+}
+#table-result .layer-cross {
+  border-bottom-left-radius: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -12,9 +12,13 @@
     width: 100%;
   }
   .layer-row {
+    position: relative;
     color: #FFFFFF;
     display: inline-block;
     border: 1px solid #FFFFFF;
     text-align: center;
+  }
+  .layer-cross {
+    border-bottom-left-radius: 20px;
   }
 }

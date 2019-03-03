@@ -65,7 +65,9 @@ class Result extends Component {
       var width = tyre.size.x/this.props.payload.container.width*100+'%';
       console.log(width);
       return(
-        <div className="layer-row" key={key} style={{background:tyre.color,width:width}}>{tyre.model.toUpperCase()}</div>
+        <div className={tyre.type==0?"layer-row":"layer-row layer-cross"} key={key} style={{background:tyre.color,width:width}}>
+          {tyre.model.toUpperCase()}
+        </div>
       )
     })
   }
