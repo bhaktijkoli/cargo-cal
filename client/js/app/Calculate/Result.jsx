@@ -37,7 +37,7 @@ class Result extends Component {
                 <div className="col-sm-6">
                 </div>
                 <div className="col-sm-6">
-                  <h3>{this.state.volume.toFixed(0)}% Volume of space utilzed</h3>
+                  <h4 style={{float:'right'}}>{this.state.volume.toFixed(0)}% Volume of space utilzed</h4>
                 </div>
                 <div id="table-result">
                   {this.printLayers()}

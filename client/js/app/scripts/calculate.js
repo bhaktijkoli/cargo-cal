@@ -4,6 +4,8 @@ console.log(container);
   let volume = {};
   volume.container = container.volume;
   volume.tyres = 0;
+  // Compression ratio
+  container.height += container.height * 1.5/100;
   // Sorting
   tyreTypes = sortTyres(tyreTypes);
   console.log("Type Tyres", tyreTypes);
