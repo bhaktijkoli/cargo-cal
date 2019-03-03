@@ -28,7 +28,6 @@ window.startCalculate = (container, tyreTypes) => {
         },
         type: 0,
       }
-      volume.tyres += el.volume;
       tyres.push(tyre);
     }
   });
@@ -41,6 +40,16 @@ window.startCalculate = (container, tyreTypes) => {
   console.log("Exit horizonal normal");
   // Cross Loading
   addCrossLoadingLayers(container, tyres, layers);
+  // Calculate final volume
+  layers.forEach(layer => {
+      layer.forEach(row=>{
+        row.forEach(tyre=>{
+          if(tyre) {
+            volume.tyres += tyre.volume;
+          }
+        })
+      })
+  });
   console.log("Container Size");
   console.log(container);
   console.log("Final result:");
