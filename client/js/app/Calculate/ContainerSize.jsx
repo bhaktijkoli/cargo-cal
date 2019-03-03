@@ -11,6 +11,7 @@ class ContainerSize extends Component {
       length: 0,
       width: 0,
       height: 0,
+      volume: 0,
     }
     this.onModelChange = this.onModelChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -82,7 +83,8 @@ class ContainerSize extends Component {
         $('#width').val(truck.width)
         $('#height').val(truck.height)
         $('#weight').val(truck.weight)
-      }, 10);
+        this.setState({volume: truck.volume})
+      }.bind(this), 10);
     }
   }
   onFormSubmit() {

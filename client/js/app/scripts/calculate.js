@@ -1,4 +1,9 @@
 window.startCalculate = (container, tyreTypes) => {
+console.log(container);
+  // Volume checking
+  let volume = {};
+  volume.container = container.volume;
+  volume.tyres = 0;
   // Sorting
   tyreTypes = sortTyres(tyreTypes);
   console.log("Type Tyres", tyreTypes);
@@ -12,6 +17,7 @@ window.startCalculate = (container, tyreTypes) => {
         weight: el.weight,
         model: el.model,
         color: el.color,
+        volume: el.volume,
         size: {
           x: 0,
           y: 0,
@@ -19,6 +25,7 @@ window.startCalculate = (container, tyreTypes) => {
         },
         type: 0,
       }
+      volume.tyres += el.volume;
       tyres.push(tyre);
     }
   });
@@ -34,8 +41,11 @@ window.startCalculate = (container, tyreTypes) => {
   console.log(layers);
   console.log("Remaing");
   console.log(tyres);
+  console.log("Volume");
+  console.log(volume);
   return {
-    layers: layers
+    layers: layers,
+    volume: volume,
   }
 }
 
