@@ -153,7 +153,8 @@ const addFirstCrossRow = (container, tyres, layer, pos) => {
       layer.push(row);
       return;
     }
-    if(pos.x + tyres[0].diameter > container.width) {
+    let nextX = Math.cos(angle) * (3/4 * tyres[0].diameter)
+    if(pos.x + nextX > container.width) {
       if(!layer) return;
       layer.push(row);
       pos.y += tyre.size.y
@@ -181,7 +182,8 @@ const addCrossRow = (container, tyres, layer, pos) => {
       layer.push(row);
       return;
     }
-    if(pos.x + tyres[0].diameter > container.width) {
+    let nextX = Math.cos(angle) * (3/4 * tyres[0].diameter)
+    if(pos.x + nextX > container.width) {
       if(!layer) return;
       layer.push(row);
       pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
