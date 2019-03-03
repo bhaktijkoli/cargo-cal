@@ -59,8 +59,10 @@ class Calculate extends Component {
           width: 165,
         }
       ],
-      stage: 2,
-    })
+    });
+    setTimeout(function () {
+      this.setState({stage:2});
+    }.bind(this), 1000);
   }
   render() {
     return (

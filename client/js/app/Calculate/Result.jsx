@@ -46,7 +46,7 @@ class Result extends Component {
       return(
         <div className="layer" key={key}>
           <div className="layer-header">{"Layer " + (key+1)}</div>
-          {this.printLayer(layer)}
+          {this.printLayer(layer.reverse())}
         </div>
       )
     })

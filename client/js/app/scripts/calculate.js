@@ -4,20 +4,20 @@ window.startCalculate = (container, tyreTypes) => {
   // Creating array of tyres
   let tyres = [];
   tyreTypes.forEach(el => {
-    var tyre = {
-      diameter: el.diameter,
-      width: el.width,
-      weight: el.weight,
-      model: el.model,
-      color: el.color,
-      size: {
-        x: 0,
-        y: 0,
-        z: 0,
-      },
-      type: 0,
-    }
     for(var i=0;i<el.number;i++) {
+      var tyre = {
+        diameter: el.diameter,
+        width: el.width,
+        weight: el.weight,
+        model: el.model,
+        color: el.color,
+        size: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        type: 0,
+      }
       tyres.push(tyre);
     }
   });
