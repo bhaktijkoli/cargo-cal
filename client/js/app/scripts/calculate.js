@@ -157,7 +157,7 @@ const addFirstCrossRow = (container, tyres, layer, pos) => {
       tyre.size.x = tyre.diameter*0.7;
     }
     pos.x += tyre.size.x;
-    tyre.size.y = tyre.width;
+    tyre.size.y = tyre.width + tyre.width*0.3;
     tyre.size.z = tyre.diameter;
     row.push(tyre);
     tyres.shift();
@@ -184,7 +184,7 @@ const addCrossRow = (container, tyres, layer, pos) => {
     var tyre = tyres[0];
     tyre.type = 1;
     tyre.size.x = tyre.diameter*0.7;
-    tyre.size.y = tyre.width;
+    tyre.size.y = tyre.width + tyre.width*0.3;
     pos.x += tyre.size.x;
     row.push(tyre);
     tyres.shift();
