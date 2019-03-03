@@ -8,6 +8,7 @@ class Result extends Component {
     super(props);
     this.state = {
       layers: [],
+      volume: 0,
     }
   }
   componentDidMount() {
@@ -19,8 +20,10 @@ class Result extends Component {
       el.remaing = el.number;
     })
     var result = startCalculate(payload.container, tyres);
+    var volume = result.volume.tyres/result.volume.container*100;
     this.setState({
       layers: result.layers,
+      volume: volume,
     })
   }
   render() {
@@ -31,6 +34,11 @@ class Result extends Component {
             <div className="card-body">
               <h2 className="card-title">Loading sequence</h2>
               <div className="row" style={{marginTop:20}}>
+                <div className="col-sm-6">
+                </div>
+                <div className="col-sm-6">
+                  <h3>{this.state.volume.toFixed(0)}% Volume of space utilzed</h3>
+                </div>
                 <div id="table-result">
                   {this.printLayers()}
                 </div>
