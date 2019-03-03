@@ -25,7 +25,11 @@ class AddTyres extends Component {
     this.onRemoveTyre = this.onRemoveTyre.bind(this)
   }
   render() {
-    let models = this.props.data.tyres;
+    let models = this.props.data.tyres.sort(function(a, b) {
+      var textA = String(a.model).toUpperCase();
+      var textB = String(b.model).toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
     let modelOptions = models.map((el, key)=> {
       return <option key={key} value={key}>{String(el.model).toUpperCase()}</option>
     })

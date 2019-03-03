@@ -1,5 +1,5 @@
 window.startCalculate = (container, tyreTypes) => {
-console.log(container);
+  console.log(container);
   // Volume checking
   let volume = {};
   volume.container = container.volume;
@@ -20,6 +20,7 @@ console.log(container);
         model: el.model,
         color: el.color,
         volume: el.volume,
+        normal: el.normal,
         size: {
           x: 0,
           y: 0,
@@ -34,7 +35,10 @@ console.log(container);
   // Start arrangement
   let layers = [];
   // Horizntal Loading
-  addHorizontalLayers(container, tyres, layers);
+  addHorizontalLayers(container, tyres, layers, 3);
+  tyres = sortTyresByNormal(tyres);
+  updateHOrizontalLayersForNormals(container, tyres, layers);
+  console.log("Exit horizonal normal");
   // Cross Loading
   addCrossLoadingLayers(container, tyres, layers);
   console.log("Container Size");
@@ -54,7 +58,7 @@ console.log(container);
 /*
 ARRANGEMENT FUNCTIONS
 */
-const addHorizontalLayers = (container, tyres, layers) => {
+const addHorizontalLayers = (container, tyres, layers, max=0) => {
   let pos = {x:0, y:0, z:0};
   var isCompleted = false;
   horizontalArrangement:
@@ -63,7 +67,7 @@ const addHorizontalLayers = (container, tyres, layers) => {
     var isLayerCompleted = false;
     while(!isLayerCompleted) {
       addHorizontalRow(container, tyres, layer, pos)
-      if(layer.length == 3) {
+      if(layer.length == max) {
         layers.push(layer);
         isLayerCompleted = true;
       }
@@ -77,7 +81,39 @@ const addHorizontalLayers = (container, tyres, layers) => {
     }
   }
 }
+const updateHOrizontalLayersForNormals = (container, tyres, layers) => {
+  console.log("Started");
+  let pos = {x:0, y:0, z:0};
+  var isCompleted = false;
+  var layerIndex = 0;
+  while(!isCompleted) {
+    let layer = layers[layerIndex];
+    console.log("layer index", layerIndex);
+    if(!layer) return;
+    var isLayerCompleted = false;
+    while(!isLayerCompleted) {
+      console.log("Y", pos.y);
+      pos.y = getHorizontalY(layer);
+      var tyre = tyres[0];
+      if(tyre) {
+        if(tyre.normal == false) return;
+        console.log("Tyre is normal");
+        if(pos.y + tyre.width > container.height) {
+          layerIndex++;
+          isLayerCompleted = true;
+        }
+      }
+      console.log("Adding row");
+      addHorizontalRow(container, tyres, layer, pos)
+    }
+  }
+}
+
 const addCrossLoadingLayers = (container, tyres, layers) => {
+  var tyre = tyres[0];
+  if(tyre) {
+    if(tyre.normal) return;
+  }
   isCompleted = false;
   layerIndex = 0;
   pos = {x:0, y:0, z:0}
@@ -205,7 +241,9 @@ const getHorizontalY = (layer) => {
   if(!layer) return 0;
   let y = 0;
   layer.forEach(el => {
-    y += el[0].size.y;
+    if(el[0]) {
+      y += el[0].size.y;
+    }
   })
   return y;
 }
@@ -220,6 +258,21 @@ const sortTyres = (arr) => {
     for (j=0, stop=len-i; j < stop; j++){
       if(arr[j] && arr[j+1]) {
         if (arr[j].weight < arr[j+1].weight) {
+          swap(arr, j, j+1);
+        }
+      }
+    }
+  }
+
+  return arr;
+}
+const sortTyresByNormal = (arr) => {
+  var len = arr.length,
+  i, j, stop;
+  for (i=0; i < len; i++){
+    for (j=0, stop=len-i; j < stop; j++){
+      if(arr[j] && arr[j+1]) {
+        if (arr[j].normal == true) {
           swap(arr, j, j+1);
         }
       }
