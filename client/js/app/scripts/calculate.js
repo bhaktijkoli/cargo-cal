@@ -1,6 +1,7 @@
 window.startCalculate = (container, tyreTypes) => {
   // Sorting
   tyreTypes = sortTyres(tyreTypes);
+  console.log("Type Tyres", tyreTypes);
   // Creating array of tyres
   let tyres = [];
   tyreTypes.forEach(el => {
@@ -71,10 +72,10 @@ const addCrossLoadingLayers = (container, tyres, layers) => {
   crossLoading:
   while(!isCompleted) {
     var layer = layers[layerIndex];
+    pos.y = getHorizontalY(layer);
     if(!layer) break crossLoading;
     var firstRow = true;
     var isLayerCompleted = false;
-    pos.y = getHorizontalY(layer);
     while(!isLayerCompleted) {
       if(firstRow) {
         addFirstCrossRow(container, tyres, layer, pos)
@@ -83,9 +84,8 @@ const addCrossLoadingLayers = (container, tyres, layers) => {
         addCrossRow(container, tyres, layer, pos)
       }
       if(tyres.length == 0) break crossLoading;
-      var tyre = tyres[0];
-      var angle = 20 * (Math.PI/180);
-      if(pos.y + (Math.sin(angle) * tyre.diameter) > container.height) {
+      if(pos.y + tyres[0].width > container.height) {
+        pos.y = 0;
         isLayerCompleted = true;
         layerIndex++;
       }
@@ -128,39 +128,38 @@ CROSS LOADING FUNCTIONs
 const addFirstCrossRow = (container, tyres, layer, pos) => {
   let row = [];
   var isRowCompleted = false;
-  firstTyre = false;
+  firstTyre = true;
   pos.x = 0;
   while(!isRowCompleted) {
     if(tyres.length == 0) {
-      layer.push(row);
-      return;
+      break;
     }
     var tyre = tyres[0];
     tyre.type = 1;
     var angle = 20 * (Math.PI/180);
     if(firstTyre) {
-      tyre.size.x = Math.cos(angle) * tyre.diameter;
-      firstTyre = true;
+      tyre.size.x = tyre.diameter;
+      firstTyre = false;
+      tyre.type = 0;
     } else {
-      tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
+      tyre.size.x = tyre.diameter*0.7;
     }
     pos.x += tyre.size.x;
-    tyre.size.y = Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
+    tyre.size.y = tyre.width;
     tyre.size.z = tyre.diameter;
     row.push(tyre);
     tyres.shift();
     if(tyres.length == 0) {
-      layer.push(row);
-      return;
+      break;
     }
-    let nextX = Math.cos(angle) * (3/4 * tyres[0].diameter)
+    let nextX = tyres[0].diameter*0.7;
     if(pos.x + nextX > container.width) {
-      if(!layer) return;
-      layer.push(row);
       pos.y += tyre.size.y
       isRowCompleted = true;
     }
   }
+  if(!layer) return;
+  layer.push(row);
 }
 const addCrossRow = (container, tyres, layer, pos) => {
   let row = [];
@@ -168,36 +167,33 @@ const addCrossRow = (container, tyres, layer, pos) => {
   pos.x = 0;
   while(!isRowCompleted) {
     if(tyres.length == 0) {
-      layer.push(row);
-      return;
+      break;
     }
     var tyre = tyres[0];
     tyre.type = 1;
-    var angle = 20 * (Math.PI/180);
-    tyre.size.x = Math.cos(angle) * (3/4 * tyre.diameter);
+    tyre.size.x = tyre.diameter*0.7;
+    tyre.size.y = tyre.width;
     pos.x += tyre.size.x;
     row.push(tyre);
     tyres.shift();
     if(tyres.length == 0) {
-      layer.push(row);
-      return;
+      break;
     }
-    let nextX = Math.cos(angle) * (3/4 * tyres[0].diameter)
+    let nextX = tyres[0].diameter*0.7;
     if(pos.x + nextX > container.width) {
-      if(!layer) return;
-      layer.push(row);
-      pos.y += Math.sin(angle) * tyre.diameter + Math.sin(70) * tyre.width;
-      pos.y += Math.sin(angle) + tyre.diameter;
+      pos.y += tyre.size.y;
       isRowCompleted = true;
     }
   }
+  if(!layer) return;
+  layer.push(row);
 }
 
 const getHorizontalY = (layer) => {
   if(!layer) return 0;
   let y = 0;
   layer.forEach(el => {
-    y += el[0].width;
+    y += el[0].size.y;
   })
   return y;
 }
